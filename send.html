@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <style type="text/css">
+        	input{
+        		height:32px;width:120px;background: #0575F2;outline: none;color: #fff;border: none;border-radius: 5px;
+        	}
+        </style>
+		<body>
+			<input type="button"  value="点击发送验证码" onclick="sendCode(this)" />
+			<script type="text/javascript">
+				var clock = '';
+				var nums = 10;
+				var btn;
+
+				function sendCode(thisBtn) {
+					
+					btn = thisBtn;
+					btn.disabled = true; //将按钮置为不可点击
+					btn.value = nums + '秒后可重新获取';
+					btn.style.background="#ccc";
+					clock = setInterval(doLoop, 1000); //一秒执行一次
+					
+				}
+
+				function doLoop() {
+					
+					nums--;
+					if(nums > 0) {
+						btn.value = nums + '秒后可重新获取';
+						
+					} else {
+						clearInterval(clock); //清除js定时器
+						btn.disabled = false;
+						btn.style.background="#0575F2";
+						btn.value = '点击发送验证码';
+						nums = 10; //重置时间
+					}
+				}
+			</script>
+		</body>
+
+</html>
